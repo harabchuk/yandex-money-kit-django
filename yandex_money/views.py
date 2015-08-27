@@ -59,6 +59,7 @@ class BaseView(View):
 
         self.logging(request, params)
         content = self.get_xml(params)
+        logger.info(content)
 
         if (
             getattr(settings, 'YANDEX_MONEY_MAIL_ADMINS_ON_PAYMENT_ERROR', True) and
@@ -109,9 +110,10 @@ class BaseView(View):
         raise NotImplementedError()
 
     def logging(self, request, params):
-        message = 'Action %s has code %s for customerNumber "%s"' % (
+        message = 'Action %s has code %s for customerNumber "%s". Post data: %s' % (
             request.POST.get('action', ''), params['code'],
-            request.POST.get('customerNumber', ''))
+            request.POST.get('customerNumber', ''),
+            request.POST)
         logger.info(message)
 
 
