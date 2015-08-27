@@ -58,7 +58,7 @@ class BasePaymentForm(forms.Form):
     paymentType = forms.CharField(label=u'Способ оплаты',
                                   widget=forms.Select(choices=Payment.PAYMENT_TYPE.CHOICES),
                                   min_length=2, max_length=2,
-                                  initial=Payment.PAYMENT_TYPE.PC)
+                                  initial=Payment.PAYMENT_TYPE.PC, required=False)
     orderSumBankPaycash = forms.IntegerField()
 
     md5 = forms.CharField(min_length=32, max_length=32)
